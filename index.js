@@ -110,7 +110,7 @@ export const consent = (granted = false) => {
       analytics_storage: 'granted'
     });
 
-    window.gtag('set', {
+    set({
       allow_google_signals: true,
       allow_ad_personalization_signals: true,
       restriced_data_processing: false,
@@ -122,7 +122,7 @@ export const consent = (granted = false) => {
       analytics_storage: 'denied'
     });
 
-    window.gtag('set', {
+    set({
       allow_google_signals: false,
       allow_ad_personalization_signals: false,
       restriced_data_processing: true,
@@ -146,8 +146,10 @@ export const setUserProperty = ({ name, value }) => {
     throw error;
   }
 
-  window.gtag('set', 'user_properties', {
-    [name]: value
+  set({
+    user_properties: {
+      [name]: value
+    }
   });
 };
 
@@ -157,8 +159,8 @@ export const setUserId = ({ id }) => {
     throw error;
   }
 
-  window.gtag('set', {
-    'user_id': id
+  set({
+    user_id: id
   });
 };
 
