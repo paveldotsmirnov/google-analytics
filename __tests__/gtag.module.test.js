@@ -15,4 +15,9 @@ describe('@haensl/google-analytics', () => {
     expect(typeof ga.event)
       .toEqual('function');
   });
+
+  it('exposes a set function', () => {
+    expect(typeof ga.set)
+      .toEqual('function');
+  });
 });

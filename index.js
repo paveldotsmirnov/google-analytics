@@ -35,6 +35,24 @@ export const regionConsent = [
   'UK' // United Kingdom
 ] + regionEU;
 
+export const set = (params) => {
+  // https://developers.google.com/tag-platform/gtagjs/reference#set
+  if (!platform.hasWindow) {
+    const error = new Error('Cannot use client lib without window.');
+    throw error;
+  }
+
+  if (typeof window.gtag !== 'function') {
+    throw new Error('gtag is not available on the window object.');
+  }
+
+  if (typeof params !== 'object' || params === null) {
+    throw new TypeError('Invalid argument: params must be a non-null object.');
+  }
+
+  window.gtag('set', params);
+};
+
 export const install = () => {
   if (platform.hasWindow) {
     if (!window.dataLayer) {
@@ -166,6 +184,7 @@ export const pageView = ({ location, title }) => {
 
 export default {
   init,
+  set,
   install,
   consent,
   event,
