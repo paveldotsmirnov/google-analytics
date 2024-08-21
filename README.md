@@ -49,6 +49,7 @@ Client/tag and measurement protocol offer similar methods, but differ in initial
   * [`init(confg)`](#tag/init): Initialize the gtag module.
   * [`install`](#tag/install): Installs gtag stubs on `window`.
   * [`consent(granted)`](#tag/consent): Consent to tracking.
+  * [`set(params)`](#tag/set): Define parameters that will be associated with every subsequent event on the page.
   * [`event(data)`](#tag/event): Track an event.
   * [`exception(data)`](#tag/exception): Track an exception.
   * [`pageView(data)`](#tag/pageview): Track a page view.
@@ -149,6 +150,50 @@ const onConsentTap = () => {
 
 // Attach to consent button.
 button.onClick = onConsentTap;
+```
+
+#### `set(params)` <a name="tag/set"></a>
+
+`import { set } from '@haensl/google-analytics'`
+
+Define parameters which will stick with subsequent events.
+
+```javascript
+set(
+   /**
+   * Event parameters.
+   *
+   * An object containing keys and values.
+   */
+  params
+)
+```
+
+Example: Set up cross-domain tracking.
+
+```
+import { set } from '@haensl/google-analytics';
+
+// set up cross-domain tracking.
+set({
+  linker: {
+    domains: ['example.com', 'sub.example.com']
+  }
+});
+```
+
+Example: Set a campaign name and ID for a black Friday shopping event. Because you've used set, all other tags, for example, GA4 Event tags or Google Ads Remarketing tags, can access this data.
+
+```
+import { set } from '@haensl/google-analytics';
+
+// set a campaign name.
+set({
+  id: 'abc',
+  source: 'google',
+  name: 'black_friday_promotion',
+  term: 'running+shoes',
+});
 ```
 
 #### `event({ name, params })` <a name="tag/event"></a>
